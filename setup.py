@@ -28,7 +28,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/met-office-lab/asn-data-utils',
+    url='https://github.com/met-office-lab/asn_data_utils',
 
     # Author details
     author='Rachel Prudden',
