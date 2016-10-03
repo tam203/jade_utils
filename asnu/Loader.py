@@ -18,7 +18,7 @@ class Loader:
             return []
         elif self.fs.ls(dirpath, True)[0]['StorageClass'] == 'DIRECTORY':
             # recurse
-            child_lists = [self._list_files(self.fs, child) for child in self.fs.ls(dirpath)]
+            child_lists = [self._list_files(child) for child in self.fs.ls(dirpath)]
             return [f for c in child_lists for f in c] # iterate through all child directories
         else:
             files = self.fs.glob(dirpath+'/*')
