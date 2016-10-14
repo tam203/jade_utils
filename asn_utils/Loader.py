@@ -5,7 +5,7 @@ import os
 class Loader:
     def __init__(self):
         self.local_path = '/usr/local/share/notebooks/data'
-        self.fs = s3fs.S3FileSystem(anon=True)
+        self.fs = s3fs.S3FileSystem()
         
     def list_buckets(self):
         return os.listdir(self.local_path)
