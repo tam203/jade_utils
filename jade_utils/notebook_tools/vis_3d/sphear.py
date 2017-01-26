@@ -16,6 +16,6 @@ def return_a_thing():
             data = data + [r, g, b, a]
 
     json.dumps(data)
-    code = js.replace("%ELEMENT_ID%", ele_id).replace("%DATA%", data)
+    code = js.replace("%ELEMENT_ID%", ele_id).replace("%DATA%", json.dumps(data))
 
     return Javascript(code)
