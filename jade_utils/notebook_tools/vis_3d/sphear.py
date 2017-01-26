@@ -2,7 +2,7 @@ from IPython.display import Javascript
 import os.path
 import json
 with open(os.path.join(os.path.dirname(__file__), 'sphear.py')) as fp:
-js = fp.read();
+    js = fp.read();
 
 def return_a_thing():
     ele_id = 'content'
