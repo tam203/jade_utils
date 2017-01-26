@@ -1,7 +1,7 @@
 from IPython.display import Javascript
 import os.path
 import json
-with open(os.path.join(os.path.dirname(__file__), 'sphear.py')) as fp:
+with open(os.path.join(os.path.dirname(__file__), 'sphear.js')) as fp:
     js = fp.read();
 
 def show():
