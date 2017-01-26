@@ -98,4 +98,7 @@ setup(
     #         'sample=sample:main',
     #     ],
     # },
+
+    package_data={'': ['*.js']},
+    include_package_data=True,
 )
