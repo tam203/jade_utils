@@ -4,6 +4,7 @@ and uses masked arrays to fill in any 'holes' that there isn't data for in the c
 """
 
 import iris
+import numpy as np
 
 def padded_orthogonal_merge(cube_list, orthogonal_coords):
     # TODO: should we always use the first cube as a template?
