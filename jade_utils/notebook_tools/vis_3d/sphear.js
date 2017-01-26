@@ -23,7 +23,7 @@ require(['T'], function(THREE) {
         var data_size = Math.sqrt(data)
         var ta = Uint8Array.from(data);
         console.log(ta)
-        var texture = new THREE.DataTexture(ta, data_size, data_size, THREE.RGBAFormat  )
+        var texture = new THREE.DataTexture(ta, 32, 32, THREE.RGBAFormat  )
         texture.needsUpdate = true;
         geometry = new THREE.SphereGeometry(200, 64, 64);
         material =  new THREE.MeshLambertMaterial({
