@@ -20,10 +20,10 @@ require(['T'], function(THREE) {
           scene.add(light);
         camera = new THREE.PerspectiveCamera( 75, width / height, 1, 1000 );
         camera.position.z = 500;
-        var data_size = Math.sqrt(data)
+        var data_size = Math.sqrt(data.length / 4)
         var ta = Uint8Array.from(data);
         console.log(ta)
-        var texture = new THREE.DataTexture(ta, 32, 32, THREE.RGBAFormat  )
+        var texture = new THREE.DataTexture(ta, data_size, data_size, THREE.RGBAFormat  )
         texture.needsUpdate = true;
         geometry = new THREE.SphereGeometry(200, 64, 64);
         material =  new THREE.MeshLambertMaterial({
