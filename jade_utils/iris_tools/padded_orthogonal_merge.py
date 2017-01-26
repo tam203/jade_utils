@@ -3,6 +3,8 @@ Experimental cube merging that trys to create a single cube from a list of cubes
 and uses masked arrays to fill in any 'holes' that there isn't data for in the cube list.
 """
 
+import iris
+
 def padded_orthogonal_merge(cube_list, orthogonal_coords):
     # TODO: should we always use the first cube as a template?
     # TODO: check that all cubes have the required orthogonal_coords as scalar coords and filter those that don't?
