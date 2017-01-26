@@ -10,7 +10,7 @@ require(['T'], function(THREE) {
     var width = 600;
     var height = 400;
     var parentDiv = document.getElementById("%ELEMENT_ID%");
-    var data = "%DATA%";
+    var data = %DATA%;
     init();
     animate();
 

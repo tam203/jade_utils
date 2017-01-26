@@ -4,7 +4,7 @@ import json
 with open(os.path.join(os.path.dirname(__file__), 'sphear.py')) as fp:
     js = fp.read();
 
-def return_a_thing():
+def show():
     ele_id = 'content'
     data = []
     for i in range(32):
@@ -15,7 +15,10 @@ def return_a_thing():
             a=255
             data = data + [r, g, b, a]
 
-    json.dumps(data)
-    code = js.replace("%ELEMENT_ID%", ele_id).replace("%DATA%", json.dumps(data))
+    code = _get_code(data, ele_id)
+
 
     return Javascript(code)
+
+def _get_code(data, ele_id):
+    return code = js.replace("%ELEMENT_ID%", ele_id).replace("%DATA%", json.dumps(data))
