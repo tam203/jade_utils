@@ -1,20 +1,15 @@
 from IPython.display import Javascript
 import os.path
 import json
+from math import sqrt
+
 with open(os.path.join(os.path.dirname(__file__), 'sphear.js')) as fp:
     js = fp.read();
 
-def show():
+def show(data):
     ele_id = 'content'
-    data = []
-    for i in range(32):
-        for j in range(32):
-            r=0
-            g=i*j%255
-            b=0
-            a=255
-            data = data + [r, g, b, a]
-
+    if not sqrt(len(data)) % 1 == 0:
+        raise Exception("length of 'data' must be a square number")
     code = _get_code(data, ele_id)
 
 
