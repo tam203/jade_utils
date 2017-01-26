@@ -21,4 +21,6 @@ def show():
     return Javascript(code)
 
 def _get_code(data, ele_id):
-    return js.replace("%ELEMENT_ID%", ele_id).replace("%DATA%", json.dumps(data))
+    code = """element.append("<div id='%s'></div>");\n""" % ele_id
+    code += js.replace("%ELEMENT_ID%", ele_id).replace("%DATA%", json.dumps(data))
+    return code
