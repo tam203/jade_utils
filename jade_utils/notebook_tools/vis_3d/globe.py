@@ -43,7 +43,7 @@ def plot(data=None, iframe=False):
         data = dummy_data
 
     html = html.replace(r'%data%', json.dumps(data))
-    return Html(html) if not iframe else to_iframe(iframe)
+    return HTML(html) if not iframe else to_iframe(iframe)
 
 
 def plot_cube(cube, iframe=False):
