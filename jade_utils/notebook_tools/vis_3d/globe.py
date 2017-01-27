@@ -11,9 +11,9 @@ except ImportError:
     from urllib import quote # python 2
 
 target_grid = None
+this_dir = os.path.dirname(__file__)
 
 def plot(data=None):
-    this_dir = os.path.dirname(__file__)
     textures_dir = os.path.join(this_dir, 'textures')
     html = open(os.path.join(this_dir, 'globe.html')).read()
 
