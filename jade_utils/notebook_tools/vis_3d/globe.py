@@ -2,7 +2,7 @@ from __future__ import division
 import os
 import base64
 import json
-from  IPython.display import IFrame, Html
+from  IPython.display import IFrame, HTML
 import iris
 import numpy as np
 
