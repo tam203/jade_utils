@@ -18,8 +18,8 @@ def plot(data=None):
     for filename in os.listdir(textures_dir):
         filepath =  os.path.join(textures_dir, filename)
         ext = os.path.splitext(filename)[1].replace('.','')
-        encoded = base64.b64encode(open(filepath, "rb").read())
-        data_url = "data:image/{};base64,{}".format(ext, encoded)
+        encoded = base64.b64encode(open(filepath, "rb").read()).decode('utf-8')
+        data_url = "data:image/{};base64,{}".format(ext, str(encoded))
 
         html = html.replace('%{}%'.format(filename), data_url)
 
@@ -35,7 +35,6 @@ def plot(data=None):
 
     html = html.replace(r'%data%', json.dumps(data))
 
-    html_data_url = quote(html, safe='~()*!.\'')
-    html_data_url = quote(html, safe='~()*!.\'')
-
-    return IFrame("data:text/html;charset=UTF-8,{}".format(html_data_url), width = 805, height = 405)
+    html_data_url = quote(html.encode('UTF-8'), safe='~()*!.\'')
+    src = "data:text/html;charset=UTF-8,{}".format(html_data_url)
+    return IFrame(src, width = 805, height = 405)
