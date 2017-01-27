@@ -34,6 +34,8 @@ def plot(data=None):
         data = dummy_data
 
     html = html.replace(r'%data%', json.dumps(data))
+
+    html_data_url = quote(html, safe='~()*!.\'')
     html_data_url = quote(html, safe='~()*!.\'')
 
-    return IFrame(html_data_url, width = 805, height = 405)
+    return IFrame("data:text/html;charset=UTF-8,{}".format(html_data_url), width = 805, height = 405)
