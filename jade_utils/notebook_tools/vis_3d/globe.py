@@ -1,3 +1,4 @@
+from __future__ import division
 import os
 import base64
 import json
