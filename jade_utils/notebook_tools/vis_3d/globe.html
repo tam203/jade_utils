@@ -119,20 +119,9 @@ void main() {
         // var bump = textureLoader.load('./textures/bump.jpg', texture => texture);
         // var specular = textureLoader.load('./textures/specular.png', texture => texture);
 
-
-
-
-
         var sat = THREE.ImageUtils.loadTexture( '%sat.jpg%');
         var bump = THREE.ImageUtils.loadTexture( '%bump.jpg%');
-        // var specular = THREE.ImageUtils.loadTexture( '%specular.png%');
-        var specular_im = document.createElement( 'img' );
-        var specular = new THREE.Texture( sat_im );
-        specular_im.onload = function()  {
-            specular.needsUpdate = true;
-        };
-        specular_im.src = 'https://github.com/met-office-lab/jade_utils/raw/master/jade_utils/notebook_tools/vis_3d/textures/specular.png';
-
+        var specular = THREE.ImageUtils.loadTexture( '%specular.png%');
 
 
 
