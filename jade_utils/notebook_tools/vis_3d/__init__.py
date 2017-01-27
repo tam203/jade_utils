@@ -1,2 +1,3 @@
-__all__ = ["sphear"]
+__all__ = ["sphear", "globe"]
 from . import sphear
+from . import globe

@@ -99,6 +99,6 @@ setup(
     #     ],
     # },
 
-    package_data={'': ['*.js']},
+    package_data={'': ['*']},
     include_package_data=True,
 )
