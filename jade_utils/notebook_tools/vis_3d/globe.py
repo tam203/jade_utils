@@ -4,6 +4,7 @@ import base64
 import json
 from  IPython.display import IFrame
 import iris
+import numpy as np
 
 try:
     from urllib.parse import quote # python 3
