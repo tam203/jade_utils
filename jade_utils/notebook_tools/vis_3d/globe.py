@@ -41,24 +41,24 @@ def plot(data=None):
     src = "data:text/html;charset=UTF-8,{}".format(html_data_url)
     return IFrame(src, width = 805, height = 405)
 
-    def plot_cube(cube):
-        if len(cube.dim_coords) != 2:
-            raise Exception('Cube must be `flat` i.e. have only two dim_coords')
+def plot_cube(cube):
+    if len(cube.dim_coords) != 2:
+        raise Exception('Cube must be `flat` i.e. have only two dim_coords')
 
-        if not target_grid:
-            target_grid = iris.load_raw(os.path.join(this_dir, 'grid.pp'))[0]
+    if not target_grid:
+        target_grid = iris.load_raw(os.path.join(this_dir, 'grid.pp'))[0]
 
-        regrided_data = cube.regrid(target_grid, iris.analysis.Linear())
-        data = regrided_data.data
-        cdata = data.flatten()
-        the_max = np.max(cdata)
-        the_min = np.min(cdata)
-        the_range = the_max - the_min
-        norm = lambda x: (x - the_min) / the_range
-        rgba = []
-        for c in cdata:
-            r = int(norm(c)*255)
-            b, g, a = 0, 0, 255
-            rgba += [r, g, b, a]
+    regrided_data = cube.regrid(target_grid, iris.analysis.Linear())
+    data = regrided_data.data
+    cdata = data.flatten()
+    the_max = np.max(cdata)
+    the_min = np.min(cdata)
+    the_range = the_max - the_min
+    norm = lambda x: (x - the_min) / the_range
+    rgba = []
+    for c in cdata:
+        r = int(norm(c)*255)
+        b, g, a = 0, 0, 255
+        rgba += [r, g, b, a]
 
-        return plot(rgba)
+    return plot(rgba)
