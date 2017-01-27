@@ -2,7 +2,7 @@ from __future__ import division
 import os
 import base64
 import json
-from  IPython.display import IFrame, HTML
+from  IPython.display import IFrame
 import iris
 import numpy as np
 
@@ -14,12 +14,7 @@ except ImportError:
 target_grid = None
 this_dir = os.path.dirname(__file__)
 
-def to_iframe(html):
-    html_data_url = quote(html.encode('UTF-8'), safe='~()*!.\'')
-    src = "data:text/html;charset=UTF-8,{}".format(html_data_url)
-    return IFrame(src, width = 805, height = 405)
-
-def plot(data=None, iframe=False):
+def plot(data=None):
     textures_dir = os.path.join(this_dir, 'textures')
     html = open(os.path.join(this_dir, 'globe.html')).read()
 
@@ -43,10 +38,12 @@ def plot(data=None, iframe=False):
         data = dummy_data
 
     html = html.replace(r'%data%', json.dumps(data))
-    return HTML(html) if not iframe else to_iframe(iframe)
 
+    html_data_url = quote(html.encode('UTF-8'), safe='~()*!.\'')
+    src = "data:text/html;charset=UTF-8,{}".format(html_data_url)
+    return IFrame(src, width = 805, height = 405)
 
-def plot_cube(cube, iframe=False):
+def plot_cube(cube):
     global target_grid
     if len(cube.dim_coords) != 2:
         raise Exception('Cube must be `flat` i.e. have only two dim_coords')
@@ -67,4 +64,4 @@ def plot_cube(cube, iframe=False):
         b, g, a = 0, 0, 255
         rgba += [r, g, b, a]
 
-    return plot(rgba, iframe)
+    return plot(rgba)
