@@ -43,6 +43,7 @@ def plot(data=None):
     return IFrame(src, width = 805, height = 405)
 
 def plot_cube(cube):
+    global target_grid
     if len(cube.dim_coords) != 2:
         raise Exception('Cube must be `flat` i.e. have only two dim_coords')
 
