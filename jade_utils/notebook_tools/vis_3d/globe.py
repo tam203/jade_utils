@@ -1,10 +1,10 @@
 from __future__ import division
 import os
-import base64
 import json
-from  IPython.display import IFrame
+from  IPython.display import HTML
 import iris
 import numpy as np
+import uuid
 
 try:
     from urllib.parse import quote # python 3
@@ -14,34 +14,27 @@ except ImportError:
 target_grid = None
 this_dir = os.path.dirname(__file__)
 
-def plot(data=None):
-    textures_dir = os.path.join(this_dir, 'textures')
-    html = open(os.path.join(this_dir, 'globe.html')).read()
+def plot_raw(data):
+    callback_name = 'callback_' + str(uuid.uuid1())[:8]
+    url = '../jade_ex/static/vis_3d/globe.html?callback=' + callback_name
+    html = """
+        <script type="text/javascript">
+            function {callback_name}(){{
+                return {data};
+            }}
+        </script>
+        <iframe src="{url}" width="805", height="405"></iframe>
+        """.format(callback_name=callback_name, url=url, data=json.dumps(data));
+    return HTML(html)
 
-    # Inject textures
-    for filename in os.listdir(textures_dir):
-        filepath =  os.path.join(textures_dir, filename)
-        ext = os.path.splitext(filename)[1].replace('.','')
-        encoded = base64.b64encode(open(filepath, "rb").read()).decode('utf-8')
-        data_url = "data:image/{};base64,{}".format(ext, str(encoded))
-
-        html = html.replace('%{}%'.format(filename), data_url)
-
-    # inject data
-    if data is None:
-        dummy_data = []
-        size = 480000
-        for i in range(size):
-            r = int((i*1.0/size) *  255)
-            b, g, a = 0, 0, 255
-            dummy_data += [r, g, b, a]
-        data = dummy_data
-
-    html = html.replace(r'%data%', json.dumps(data))
-
-    html_data_url = quote(html.encode('UTF-8'), safe='~()*!.\'')
-    src = "data:text/html;charset=UTF-8,{}".format(html_data_url)
-    return IFrame(src, width = 805, height = 405)
+def dummy_data():
+    dummy_data = []
+    size = 480000
+    for i in range(size):
+        r = int((i*1.0/size) *  255)
+        b, g, a = 0, 0, 255
+        dummy_data += [r, g, b, a]
+    return dummy_data
 
 def plot_cube(cube):
     global target_grid
@@ -64,4 +57,4 @@ def plot_cube(cube):
         b, g, a = 0, 0, 255
         rgba += [r, g, b, a]
 
-    return plot(rgba)
+    return plot_raw(rgba)

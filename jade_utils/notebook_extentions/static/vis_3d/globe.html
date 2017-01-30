@@ -59,6 +59,13 @@ void main() {
     var textureLoader;
     var width = 800;
     var height = 400;
+    var data;
+
+
+    if(window.parent){
+      var callbackName = window.location.search.split('callback=')[1].split('&')[0]
+      data = window.parent[callbackName]()
+    }
 
     cleanUp();
     init();
@@ -113,20 +120,9 @@ void main() {
 
     function addGlobeMesh() {
 
-
-        //
-        // var sat = textureLoader.load('./textures/sat.jpg', texture => texture);
-        // var bump = textureLoader.load('./textures/bump.jpg', texture => texture);
-        // var specular = textureLoader.load('./textures/specular.png', texture => texture);
-
-        var sat = THREE.ImageUtils.loadTexture( '%sat.jpg%');
-        var bump = THREE.ImageUtils.loadTexture( '%bump.jpg%');
-        var specular = THREE.ImageUtils.loadTexture( '%specular.png%');
-
-
-
-
-
+        var sat = textureLoader.load('textures/sat.jpg', texture => texture);
+        var bump = textureLoader.load('textures/bump.jpg', texture => texture);
+        var specular = textureLoader.load('textures/specular.png', texture => texture);
 
         var geometry = new THREE.SphereGeometry(1, 32, 32);
         var material = new THREE.MeshPhongMaterial({
@@ -144,7 +140,7 @@ void main() {
 
 
     function getPyDataTexture() {
-        var raw = Uint8Array.from(%data%);
+        var raw = Uint8Array.from(data);
         var texture = new THREE.DataTexture(raw,800,600,THREE.RGBAFormat);
         texture.magFilter = THREE.LinearFilter;
         texture.minFilter = THREE.LinearFilter;
@@ -153,7 +149,7 @@ void main() {
     }
 
     function addDataMesh() {
-        var colorMap = THREE.ImageUtils.loadTexture( '%viridis.png%');
+        var colorMap = textureLoader.load('textures/viridis.png', texture => texture);
 
         var geometry = new THREE.SphereGeometry(1.01, 32, 32);
         var material = new THREE.ShaderMaterial({

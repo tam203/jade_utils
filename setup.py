@@ -9,12 +9,23 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 from os import path
+import os
 
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
+
+def package_files(directory):
+    dirname = os.path.dirname(directory)
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.relpath(os.path.join(path, filename), os.path.join(directory,'..')))
+    #raise Exception('my paths %s, %s'% (paths, directory))
+    return paths
+
 
 setup(
     name='jade_utils',
@@ -99,6 +110,8 @@ setup(
     #     ],
     # },
 
-    package_data={'': ['*', '**/*']},
+    package_data={'': ['*', '**/*'],
+    'jade_utils.notebook_extentions':package_files(os.path.join(here,'jade_utils/notebook_extentions/static'))},
+
     include_package_data=True,
 )
