@@ -60,12 +60,18 @@ void main() {
     var width = 800;
     var height = 400;
     var data;
+    var cmap = 'viridis';
 
 
     if(window.parent){
       var callbackName = window.location.search.split('callback=')[1].split('&')[0]
+      // Set colour map if one avaliable else use default
+      if(window.location.search.search('cmap=') >= 0){
+        cmap = window.location.search.split('cmap=')[1].split('&')[0]
+      }
       window.parent[callbackName](
         function(msg){
+          data = JSON.parse(msg.content.text)
           cleanUp();
           init();
           animate();
@@ -150,7 +156,7 @@ void main() {
     }
 
     function addDataMesh() {
-        var colorMap = textureLoader.load('textures/viridis.png', texture => texture);
+        var colorMap = textureLoader.load('textures/'+cmap+'.png', texture => texture);
 
         var geometry = new THREE.SphereGeometry(1.01, 32, 32);
         var material = new THREE.ShaderMaterial({

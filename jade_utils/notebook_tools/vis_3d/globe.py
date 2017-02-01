@@ -29,11 +29,13 @@ def get_from_data_holder_and_delete(id):
 def get_from_data_holder_as_json(id):
     return json.dumps(get_from_data_holder(id))
 
-def plot_raw(data):
+def plot_raw(data, cmap=None):
     data_id = str(uuid.uuid1())[:8]
     callback_name = 'callback_' + data_id
     add_to_data_holder(data, data_id)
     url = '../jade_ex/static/vis_3d/globe.html?callback=' + callback_name
+    if cmap:
+        url += '&cmap=' + cmap
     code = """'from jade_utils.notebook_tools.vis_3d import globe;' +
                 'print(globe.get_from_data_holder_and_delete("{data_id}"))'""".format(data_id=data_id)
     html = """
@@ -64,7 +66,7 @@ def dummy_data():
         dummy_data += [r, g, b, a]
     return dummy_data
 
-def plot_cube(cube):
+def plot_cube(cube, cmap=None):
     global target_grid
     if len(cube.dim_coords) != 2:
         raise Exception('Cube must be `flat` i.e. have only two dim_coords')
@@ -85,4 +87,4 @@ def plot_cube(cube):
         b, g, a = 0, 0, 255
         rgba += [r, g, b, a]
 
-    return plot_raw(rgba)
+    return plot_raw(rgba, cmap)
