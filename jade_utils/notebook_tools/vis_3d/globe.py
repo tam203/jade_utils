@@ -5,6 +5,7 @@ from  IPython.display import HTML
 import iris
 import numpy as np
 import uuid
+from collections import OrderedDict
 
 try:
     from urllib.parse import quote # python 3
@@ -13,18 +14,45 @@ except ImportError:
 
 target_grid = None
 this_dir = os.path.dirname(__file__)
+data_store = OrderedDict()
+
+def add_to_data_holder(data, id):
+    data_store[id] = data
+    while len(data_store) > 5:
+        del data_store[data_store.keys()[0]]
+
+def get_from_data_holder_and_delete(id):
+    data = data_store[id]
+    del data_store[id]
+    return data
+
+def get_from_data_holder_as_json(id):
+    return json.dumps(get_from_data_holder(id))
 
 def plot_raw(data):
-    callback_name = 'callback_' + str(uuid.uuid1())[:8]
+    data_id = str(uuid.uuid1())[:8]
+    callback_name = 'callback_' + data_id
+    add_to_data_holder(data, data_id)
     url = '../jade_ex/static/vis_3d/globe.html?callback=' + callback_name
+    code = """'from jade_utils.notebook_tools.vis_3d import globe;' +
+                'print(globe.get_from_data_holder_and_delete("{data_id}"))'""".format(data_id=data_id)
     html = """
         <script type="text/javascript">
-            function {callback_name}(){{
-                return {data};
+            function {callback_name}(callback){{
+                // Comment
+                Jupyter.notebook.kernel.execute(
+                    {code},
+                    {{
+                        iopub : {{
+                            output : callback
+                        }}
+                    }}
+                );
+
             }}
         </script>
         <iframe src="{url}" width="805", height="405"></iframe>
-        """.format(callback_name=callback_name, url=url, data=json.dumps(data));
+        """.format(callback_name=callback_name, url=url, data=json.dumps(data), code=code);
     return HTML(html)
 
 def dummy_data():

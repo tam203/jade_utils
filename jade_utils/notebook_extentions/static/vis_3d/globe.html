@@ -64,12 +64,13 @@ void main() {
 
     if(window.parent){
       var callbackName = window.location.search.split('callback=')[1].split('&')[0]
-      data = window.parent[callbackName]()
+      window.parent[callbackName](
+        function(msg){
+          cleanUp();
+          init();
+          animate();
+      });
     }
-
-    cleanUp();
-    init();
-    animate();
 
     function init(){
         textureLoader = new THREE.TextureLoader();
