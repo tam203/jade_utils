@@ -82,6 +82,7 @@ def plot_cube(cube, cmap=None):
     the_range = the_max - the_min
     norm = lambda x: (x - the_min) / the_range
     rgba = []
+    # norm_data = data = (data - the_min) * (1/the_range) # TODO: must be more efficent ways...
     for c in cdata:
         if not np.ma.is_masked(c):
             r = int(norm(c)*255)
