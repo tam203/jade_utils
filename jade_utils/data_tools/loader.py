@@ -1,4 +1,4 @@
-import s3fs
+from boto.s3.connection import S3Connection
 import re
 import os
 
@@ -22,15 +22,10 @@ class Loader:
         * dataset:
             Name of dataset to search for.
         """
-        return [self.local_path + '/' + path for path in self._list_files(dirpath)]
+        files = self._list_files(dataset)
+        return [self.local_path + '/' + f for f in files]
 
-    def _list_files(self, dirpath):
-        if len(self.fs.ls(dirpath)) == 0:
-            return []
-        elif self.fs.ls(dirpath, True)[0]['StorageClass'] == 'DIRECTORY':
-            # recurse
-            child_lists = [self._list_files(child) for child in self.fs.ls(dirpath)]
-            return [f for c in child_lists for f in c]  # iterate through all child directories
-        else:
-            files = self.fs.glob(dirpath+'/*')
-            return files
+    def _list_keys(self, bucket):
+        conn = S3Connection()
+        s3_bucket = conn.get_bucket(bucket)
+        return ['{}/{}'.format(k.bucket.name, k.key) for k in bucket]
