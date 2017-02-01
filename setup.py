@@ -10,10 +10,10 @@ from setuptools import setup, find_packages
 from codecs import open
 import os
 
-here = path.abspath(path.dirname(__file__))
+here = os.path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 def package_files(directory):
@@ -88,7 +88,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['s3fs'],
+    install_requires=['boto'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
