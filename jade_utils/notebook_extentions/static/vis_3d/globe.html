@@ -41,9 +41,10 @@ float remapValueToRange(float val, float low1, float high1, float low2, float hi
 
 void main() {
 
+  float alphaValue = texture2D(dataTexture, vUv).a;
   float dataValue = texture2D(dataTexture, vUv).r;
   vec4 colorLookup = texture2D(colorMap, vec2(dataValue, 0.5));
-  vec4 color = vec4(colorLookup.r, colorLookup.g, colorLookup.b, remapValueToRange(dataValue, 0.0, 1.0, 0.3, 0.8));
+  vec4 color = vec4(colorLookup.r, colorLookup.g, colorLookup.b, alphaValue);
   gl_FragColor = color;
 
 }

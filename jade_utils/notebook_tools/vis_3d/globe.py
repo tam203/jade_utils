@@ -62,7 +62,7 @@ def dummy_data():
     size = 480000
     for i in range(size):
         r = int((i*1.0/size) *  255)
-        b, g, a = 0, 0, 255
+        b, g, a = 0, 0, 200
         dummy_data += [r, g, b, a]
     return dummy_data
 
@@ -83,8 +83,13 @@ def plot_cube(cube, cmap=None):
     norm = lambda x: (x - the_min) / the_range
     rgba = []
     for c in cdata:
-        r = int(norm(c)*255)
-        b, g, a = 0, 0, 255
+        if not np.ma.is_masked(c):
+            r = int(norm(c)*255)
+            a = 200
+        else:
+            r = 0
+            a = 0
+        b, g = 0, 0
         rgba += [r, g, b, a]
 
     return plot_raw(rgba, cmap)
