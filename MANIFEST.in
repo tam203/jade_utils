@@ -1,0 +1,2 @@
+include versioneer.py
+include jade_utils/_version.py
