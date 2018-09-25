@@ -1,0 +1,12 @@
+name: jade_utils
+channels:
+  - conda-forge
+  - scitools
+  - defaults
+dependencies:
+  - python=3.6
+  - iris
+  - pip:
+    - sphinx
+    - sphinx-rtd-theme
+    - numpydoc
