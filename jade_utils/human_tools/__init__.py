@@ -1,3 +1,4 @@
+"""Tools to make things more human readable."""
 
 def human_bytes(num, suffix='B', use_binary_prefix=True):
     """Provide a human readable representation of a specified number of bytes.
@@ -8,8 +9,8 @@ def human_bytes(num, suffix='B', use_binary_prefix=True):
 
     Args:
         num (int): The number of bytes you wish to represent.
-        suffix (str, optional): The suffix for the representation.
-        use_binary_prefix (bool, optional): Use binary prefix, if False use decimal prefix.
+        suffix (str, optional): The suffix for the representation. Defaults to 'B'
+        use_binary_prefix (bool, optional): Use binary prefix, Defaults to True, if False use decimal prefix.
                                             https://en.wikipedia.org/wiki/Binary_prefix
 
     Returns:
