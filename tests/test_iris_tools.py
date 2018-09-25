@@ -22,3 +22,24 @@ def test_quiet_load():
 
     assert loud_cubelist[0].data == quiet_cubelist[0].data
     # TODO: Should also test that it is quiet
+
+def test_quiet_load_raw():
+    from jade_utils.iris_tools import quiet_load
+
+    test_cube_path = os.path.join(os.path.dirname(__file__), 'data', 'test.nc')
+    loud_cubelist = iris.load_raw(test_cube_path)
+    quiet_cubelist = quiet_load_raw(test_cube_path)
+
+    assert loud_cubelist[0].data == quiet_cubelist[0].data
+    # TODO: Should also test that it is quiet
+
+
+def test_quiet_load_cube():
+    from jade_utils.iris_tools import quiet_load
+
+    test_cube_path = os.path.join(os.path.dirname(__file__), 'data', 'test.nc')
+    loud_cubelist = iris.load_cube(test_cube_path, 'air_temperature')
+    quiet_cubelist = quiet_load_cube(test_cube_path, 'air_temperature')
+
+    assert loud_cubelist.data == quiet_cubelist.data
+    # TODO: Should also test that it is quiet

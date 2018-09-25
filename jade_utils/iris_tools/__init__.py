@@ -60,3 +60,39 @@ def quiet_load(*args, **kwargs):
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         return iris.load(*args, **kwargs)
+
+
+def quiet_load_raw(*args, **kwargs):
+    """Like iris.load_raw but quieter.
+
+    When using `iris.load_raw` it often generates a whole bunch of warnings, this wrapper
+    simply supresses them.
+
+    Args:
+        See `iris.load_raw`.
+
+    Returns:
+        See `iris.load_raw`.
+    """
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        return iris.load_raw(*args, **kwargs)
+
+
+def quiet_load_cube(*args, **kwargs):
+    """Like iris.load_cube but quieter.
+
+    When using `iris.load_cube` it often generates a whole bunch of warnings, this wrapper
+    simply supresses them.
+
+    Args:
+        See `iris.load_cube`.
+
+    Returns:
+        See `iris.load_cube`.
+    """
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        return iris.load_cube(*args, **kwargs)
