@@ -1,7 +1,7 @@
 Quickstart
 ==========
 
-``jade_utils-iris`` provides helper functions for use on Pangeo.
+``jade_utils`` provides helper functions for use on Pangeo.
 
 
 Installation

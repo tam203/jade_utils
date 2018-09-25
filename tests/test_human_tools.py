@@ -13,5 +13,7 @@ def test_human_bytes():
     assert human_bytes(1024*1024*1024*1024*1024*1024) == '1.0EiB'
     assert human_bytes(1024*1024*1024*1024*1024*1024*1024) == '1.0ZiB'
     assert human_bytes(1024*1024*1024*1024*1024*1024*1024*1024) == '1.0YiB'
+    assert human_bytes(1024*1024*1024*1024*1024*1024*1024*1024*1024) == '1024.0YiB'
 
     assert human_bytes(1024, ' Bytes') == '1.0Ki Bytes'
+    assert human_bytes(1000, use_binary_prefix=False) == '1.0KB'
