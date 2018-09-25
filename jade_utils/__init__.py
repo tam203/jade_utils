@@ -1,4 +1,4 @@
-__all__ = ["notebook_tools", "iris_tools", "data_tools", 'human']
+__all__ = ["iris_tools", 'human_tools']
 from ._version import get_versions
 __version__ = get_versions()['version']
 del get_versions

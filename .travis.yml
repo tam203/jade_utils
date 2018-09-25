@@ -18,7 +18,7 @@ install:
   conda install -y conda-build anaconda-client flake8
 script:
 - |
-  flake8 .
+  flake8 jade_utils
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       conda build -c defaults -c conda-forge ./conda
   else
