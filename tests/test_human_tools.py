@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 
 def test_human_bytes():
-    from jade_utils.human import human_bytes
+    from jade_utils.human_tools import human_bytes
 
     assert human_bytes(1024) == '1.0KiB'
     assert human_bytes(1024*1024) == '1.0MiB'
