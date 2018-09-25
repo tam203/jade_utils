@@ -17,8 +17,8 @@ requirements:
     - python
     - jinja2
     - iris
-  # run:
-  #   -
+  run:
+    - python
 
 test:
   source_files:
