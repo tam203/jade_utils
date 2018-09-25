@@ -14,7 +14,7 @@ build:
 
 requirements:
   build:
-    - python
+    - python==3.6.6
     - jinja2
     - iris
   # run:
