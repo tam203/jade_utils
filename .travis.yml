@@ -19,7 +19,7 @@ install:
 script:
 - |
   flake8 jade_utils
-  conda build ./conda
+  conda build -c scitools -c conda-forge ./conda
 - |
   if [ -n "$TRAVIS_TAG" ]; then
       # If tagged git version, upload package to main channel
