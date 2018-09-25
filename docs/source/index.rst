@@ -12,12 +12,4 @@ __ OurPangeo_
    :caption: Contents:
 
    quickstart.rst
-   api.rst
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   utilities.rst
