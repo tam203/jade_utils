@@ -1,6 +1,10 @@
 """Tools for working with iris cubes."""
 import functools
 import operator
+import warnings
+
+import iris
+
 from ..human_tools import human_bytes
 
 
@@ -38,3 +42,57 @@ def estimate_cube_size(cube, humanize=True):
     if humanize:
         return human_bytes(total_bytes)
     return total_bytes
+
+
+def quiet_load(*args, **kwargs):
+    """Like iris.load but quieter.
+
+    When using `iris.load` it often generates a whole bunch of warnings, this wrapper
+    simply supresses them.
+
+    Args:
+        See `iris.load`.
+
+    Returns:
+        See `iris.load`.
+    """
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        return iris.load(*args, **kwargs)
+
+
+def quiet_load_raw(*args, **kwargs):
+    """Like iris.load_raw but quieter.
+
+    When using `iris.load_raw` it often generates a whole bunch of warnings, this wrapper
+    simply supresses them.
+
+    Args:
+        See `iris.load_raw`.
+
+    Returns:
+        See `iris.load_raw`.
+    """
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        return iris.load_raw(*args, **kwargs)
+
+
+def quiet_load_cube(*args, **kwargs):
+    """Like iris.load_cube but quieter.
+
+    When using `iris.load_cube` it often generates a whole bunch of warnings, this wrapper
+    simply supresses them.
+
+    Args:
+        See `iris.load_cube`.
+
+    Returns:
+        See `iris.load_cube`.
+    """
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        return iris.load_cube(*args, **kwargs)
