@@ -31,7 +31,7 @@ def estimate_cube_size(cube, humanize=True):
     """
     num_points = functools.reduce(operator.mul, cube.shape, 1)
     num_bytes = 0
-    dtype = cube[(0, ) * len(cube.shape)].data.dtype
+    dtype = cube[(0, ) * len(cube.shape)].dtype
     if dtype == 'float16' or dtype == 'int16':
         num_bytes = 16
     if dtype == 'float32' or dtype == 'int32':
